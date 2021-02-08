@@ -28,7 +28,7 @@ def hello(name)
 end
 
 def starts_with_consonant? s
-  s =~ /^([bcdfghjklmnpqrstvwxys])/i
+  s =~ /^([bcdfghjklmnpqrstvwxyz])/i
 end
 
 def binary_multiple_of_4? s
@@ -41,5 +41,54 @@ end
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  
+  def initialize(isbn, price)
+    if validIsbn? isbn and validPrice? price
+      @isbn = isbn
+      @price = price
+    end
+  end
+  
+  # Validation helper functions for @isbn and @price
+  def validIsbn? isbn
+    if isbn.empty?
+      raise ArgumentError.new "Invalid ISBN"
+    end
+    true
+  end
+  
+  def validPrice? price
+    if price <= 0
+      raise ArgumentError.new "Invalid Price"
+    end
+    true
+  end
+  
+  # Getters
+  def isbn
+    @isbn
+  end
+  
+  def price 
+    @price
+  end
+  
+  # Setters
+  def isbn=(new_isbn)
+    if validIsbn? new_isbn
+      @isbn = new_isbn
+    end
+  end
+  
+  def price=(new_price)
+    if validPrice? new_price
+      @price = new_price
+    end
+  end
+  
+  # price_as_string
+  def price_as_string
+    '$' + '%.2f' % @price
+  end
+
 end
